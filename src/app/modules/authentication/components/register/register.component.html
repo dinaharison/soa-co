@@ -1,0 +1,58 @@
+<div class="d-flex flex-column justify-content-center align-items-start">
+  <div>
+    <h4>Create Your Account</h4>
+    <p>Welcome! Please enter your informations to create an account.</p>
+  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister($event)">
+    <div class="form-floating mb-3">
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        formControlName="email"
+      />
+      <label for="email">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        name="username"
+        formControlName="username"
+      />
+      <label for="username">Username</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        formControlName="password"
+      />
+      <label for="password">Password</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="password"
+        class="form-control"
+        id="passwordCheck"
+        name="passwordCheck"
+        formControlName="passwordCheck"
+      />
+      <label for="passwordCheck">Password Check</label>
+    </div>
+    <div class="mb-3">
+      <small>fields marked with a (*) are required</small>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="registerForm.invalid"
+    >
+      Register
+    </button>
+  </form>
+</div>
