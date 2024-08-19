@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { RegisterValidatorService } from '../../services/validators/register-validator.service';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
+import { RegisterValidatorService } from './service/formvalidation/register-validator.service';
 
 @Component({
   selector: 'app-register',
@@ -28,6 +33,24 @@ export class RegisterComponent {
     },
     { validators: [this.registerValidatorService.passwordValidator()] }
   );
+
+  getError(controlName: string): string[] {
+    let control = this.registerForm?.get(controlName);
+    if (control?.invalid && (control?.touched || control?.dirty)) {
+      return this.registerValidatorService.getError(control);
+    } else {
+      return [];
+    }
+  }
+
+  async getClass(controlName: string): Promise<string> {
+    let control = this.registerForm?.get(controlName);
+    if (control?.invalid && (control?.touched || control?.dirty)) {
+      return this.getError(controlName).length > 0 ? 'is-invalid' : 'is-valid';
+    } else {
+      return '';
+    }
+  }
 
   onRegister(event: any) {
     event.preventDefault();

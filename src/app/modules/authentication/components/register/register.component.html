@@ -11,8 +11,16 @@
         id="email"
         name="email"
         formControlName="email"
+        [ngClass]="getClass('email')"
       />
-      <label for="email">Email</label>
+      <label for="email">Email<sup>*</sup></label>
+      <div *ngIf="getError('email').length > 0">
+        <div class="ul">
+          <li *ngFor="let error of getError('email')">
+            <small>{{ error }}</small>
+          </li>
+        </div>
+      </div>
     </div>
     <div class="form-floating mb-3">
       <input
@@ -22,7 +30,7 @@
         name="username"
         formControlName="username"
       />
-      <label for="username">Username</label>
+      <label for="username">Username<sup>*</sup></label>
     </div>
     <div class="form-floating mb-3">
       <input
@@ -32,7 +40,7 @@
         name="password"
         formControlName="password"
       />
-      <label for="password">Password</label>
+      <label for="password">Password<sup>*</sup></label>
     </div>
     <div class="form-floating mb-3">
       <input
@@ -42,7 +50,7 @@
         name="passwordCheck"
         formControlName="passwordCheck"
       />
-      <label for="passwordCheck">Password Check</label>
+      <label for="passwordCheck">Password Check<sup>*</sup></label>
     </div>
     <div class="mb-3">
       <small>fields marked with a (*) are required</small>
