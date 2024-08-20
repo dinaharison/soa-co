@@ -1,90 +1,49 @@
-<div class="d-flex flex-column justify-content-center align-items-start">
-  <div>
-    <h4>Create Your Account</h4>
-    <p>Welcome! Please enter your informations to create an account.</p>
+<div class="container-md">
+  <div class="d-flex flex-column justify-content-center">
+    <div class="col-sm">
+      <div>
+        <h4>Join us</h4>
+        <p>Fill the form bellow to join us</p>
+      </div>
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="onRegister($event)"
+        novalidate
+      >
+        <form-control
+          [id]="'email'"
+          [type]="'text'"
+          formControlName="email"
+          [errors]="getError('email')"
+          [inputNgClass]="getClass('email')"
+        ></form-control>
+
+        <form-control
+          [id]="'username'"
+          [type]="'text'"
+          formControlName="username"
+          [errors]="getError('username')"
+          [inputNgClass]="getClass('username')"
+        ></form-control>
+
+        <form-control
+          [id]="'password'"
+          [type]="'password'"
+          formControlName="password"
+          [errors]="getError('password')"
+          [inputNgClass]="getClass('password')"
+        ></form-control>
+
+        <form-control
+          [id]="'passwordCheck'"
+          [type]="'password'"
+          formControlName="passwordCheck"
+          [errors]="getError('passwordCheck')"
+          [inputNgClass]="getClass('passwordCheck')"
+        ></form-control>
+
+        <button type="submit" class="btn btn-primary btn-sm">Register</button>
+      </form>
+    </div>
   </div>
-  <form [formGroup]="registerForm" (ngSubmit)="onRegister($event)">
-    <div class="form-floating mb-3">
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        name="email"
-        formControlName="email"
-        [ngClass]="getClass('email')"
-      />
-      <label for="email">Email<sup>*</sup></label>
-      <div *ngIf="getError('email').length > 0">
-        <div class="ul">
-          <li *ngFor="let error of getError('email')">
-            <small>{{ error }}</small>
-          </li>
-        </div>
-      </div>
-    </div>
-    <div class="form-floating mb-3">
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        name="username"
-        formControlName="username"
-        [ngClass]="getClass('username')"
-      />
-      <label for="username">Username<sup>*</sup></label>
-      <div *ngIf="getError('username').length > 0">
-        <div class="ul">
-          <li *ngFor="let error of getError('username')">
-            <small>{{ error }}</small>
-          </li>
-        </div>
-      </div>
-    </div>
-    <div class="form-floating mb-3">
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        name="password"
-        formControlName="password"
-        [ngClass]="getClass('password')"
-      />
-      <label for="password">Password<sup>*</sup></label>
-      <div *ngIf="getError('password').length > 0">
-        <div class="ul">
-          <li *ngFor="let error of getError('password')">
-            <small>{{ error }}</small>
-          </li>
-        </div>
-      </div>
-    </div>
-    <div class="form-floating mb-3">
-      <input
-        type="password"
-        class="form-control"
-        id="passwordCheck"
-        name="passwordCheck"
-        formControlName="passwordCheck"
-        [ngClass]="getClass('passwordCheck')"
-      />
-      <label for="passwordCheck">Password Check<sup>*</sup></label>
-      <div *ngIf="getError('passwordCheck').length > 0">
-        <div class="ul">
-          <li *ngFor="let error of getError('passwordCheck')">
-            <small>{{ error }}</small>
-          </li>
-        </div>
-      </div>
-    </div>
-    <div class="mb-3">
-      <small>fields marked with a (*) are required</small>
-    </div>
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="registerForm.invalid"
-    >
-      Register
-    </button>
-  </form>
 </div>

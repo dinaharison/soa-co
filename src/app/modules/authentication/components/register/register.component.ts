@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterValidatorService } from './service/formvalidation/register-validator.service';
+import { FormValidationPipePipe } from '../../pipe/form-validation-pipe.pipe';
 
 @Component({
   selector: 'app-register',
@@ -57,15 +53,16 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  getClass(controlName: string): string | null {
-    let control = this.registerForm?.get(controlName);
-    if (control?.touched || control?.dirty) {
-      return this.getError(controlName).length > 0 ? 'is-invalid' : 'is-valid';
-    }
-    return null;
+  getClass(control: string): string {
+    return new FormValidationPipePipe().transform(
+      control,
+      this.registerForm,
+      this.getError(control)
+    );
   }
 
   onRegister(event: any) {
     event.preventDefault();
+    if (this.registerForm.invalid) return;
   }
 }
