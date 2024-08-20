@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -12,27 +12,32 @@ import { RegisterValidatorService } from './service/formvalidation/register-vali
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   constructor(private registerValidatorService: RegisterValidatorService) {}
-  registerForm = new FormGroup(
-    {
-      email: new FormControl('', {
-        validators: [Validators.required, Validators.email],
-      }),
-      username: new FormControl('', { validators: [Validators.required] }),
-      password: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern('^(?=.*[A-Z])(?=.*[\\W])(?=.*\\d).*$'),
-        ],
-      }),
-      passwordCheck: new FormControl('', {
-        validators: [Validators.required],
-      }),
-    },
-    { validators: [this.registerValidatorService.passwordValidator()] }
-  );
+  registerForm = new FormGroup({
+    email: new FormControl('', {
+      validators: [Validators.required, Validators.email],
+    }),
+    username: new FormControl('', { validators: [Validators.required] }),
+    password: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern('^(?=.*[A-Z])(?=.*[\\W])(?=.*\\d).*$'),
+      ],
+    }),
+    passwordCheck: new FormControl('', {
+      validators: [Validators.required],
+    }),
+  });
+
+  ngOnInit(): void {
+    this.registerForm.controls['passwordCheck'].addValidators(
+      this.registerValidatorService.passwordValidator(
+        this.registerForm.controls['password']
+      )
+    );
+  }
 
   getError(controlName: string): string[] {
     let control = this.registerForm?.get(controlName);

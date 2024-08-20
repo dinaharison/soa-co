@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {
   AbstractControl,
   ValidationErrors,
@@ -11,10 +11,10 @@ import {
 })
 export class RegisterValidatorService {
   constructor() {}
-  passwordValidator(): ValidatorFn {
+  passwordValidator(passwordControl: AbstractControl): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      let passwordCheck: string = control.get('passwordCheck')?.value;
-      let password: string = control.get('password')?.value;
+      let passwordCheck: string = control?.value;
+      let password: string = passwordControl?.value;
 
       if (!password || !passwordCheck) return null;
       if (password !== passwordCheck) return { passwordMismatched: true };
@@ -55,9 +55,6 @@ export class RegisterValidatorService {
       required: 'This field is required.',
       passwordMismatched: 'Passwords do not match',
     };
-
-    console.log(control?.errors);
-
     return this.getErrors(errorMessages, control);
   }
 
