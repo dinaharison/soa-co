@@ -36,20 +36,28 @@ export class RegisterComponent {
 
   getError(controlName: string): string[] {
     let control = this.registerForm?.get(controlName);
-    if (control?.invalid && (control?.touched || control?.dirty)) {
-      return this.registerValidatorService.getError(control);
-    } else {
-      return [];
+    switch (controlName) {
+      case 'email':
+        return this.registerValidatorService.getEmailErrors(control);
+      case 'password':
+        return this.registerValidatorService.getPasswordErrors(control);
+      case 'username':
+        return this.registerValidatorService.getUsernameErrors(control);
+      case 'passwordCheck':
+        return this.registerValidatorService.getPasswordCheckErrors(control);
+      default:
+        throw new Error(
+          `Please Implement a validation logic for the control : ${controlName}`
+        );
     }
   }
 
-  async getClass(controlName: string): Promise<string> {
+  getClass(controlName: string): string | null {
     let control = this.registerForm?.get(controlName);
-    if (control?.invalid && (control?.touched || control?.dirty)) {
+    if (control?.touched || control?.dirty) {
       return this.getError(controlName).length > 0 ? 'is-invalid' : 'is-valid';
-    } else {
-      return '';
     }
+    return null;
   }
 
   onRegister(event: any) {
