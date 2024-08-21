@@ -48,5 +48,6 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
+    console.log(this.loginForm.value);
   }
 }
