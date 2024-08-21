@@ -1,12 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a
-      class="navbar-brand"
-      routerLink="/"
-      routerLinkActive=""
-      [routerLinkActiveOptions]="{ exact: true }"
-      >Soa Co</a
-    >
+    <div class="col">
+      <a
+        class="navbar-brand"
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Soa Co</a
+      >
+    </div>
     <button
       class="navbar-toggler"
       type="button"
@@ -15,15 +17,22 @@
       aria-controls="navbarNav"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      (click)="isMenuCollapsed = !isMenuCollapsed"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav" *ngFor="let route of routes">
-        <li class="nav-item">
-          <nav-item [route]="route.route" [name]="route.name"></nav-item>
-        </li>
-      </ul>
+    <div
+      [ngbCollapse]="isMenuCollapsed"
+      class="collapse navbar-collapse"
+      id="navbarNav"
+    >
+      <div class="col justify-content-end navbar-nav">
+        <ul class="navbar-nav" *ngFor="let route of routes">
+          <li class="nav-item">
+            <nav-item [route]="route.route" [name]="route.name"></nav-item>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
