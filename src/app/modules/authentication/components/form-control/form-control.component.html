@@ -1,3 +1,6 @@
+<!-- TODO : 
+ 
+-->
 <div [class]="containerClass">
   <input
     [type]="type"
@@ -9,9 +12,9 @@
     [disabled]="isDisabled ? 'disabled' : ''"
     (input)="onInputChanged($event)"
   />
-  <label [for]="id">{{ id }}</label>
+  <label [for]="id">{{ label }}</label>
   <div *ngIf="errors.length > 0">
-    <div class="invalid-feedback" *ngFor="let error of errors">
+    <div class="errors" *ngFor="let error of errors">
       <small>{{ error }}</small>
     </div>
   </div>

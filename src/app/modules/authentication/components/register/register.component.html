@@ -1,48 +1,59 @@
-<div class="container-md">
-  <div class="d-flex flex-column justify-content-center">
-    <div class="col-sm">
-      <div>
-        <h4>Join us</h4>
-        <p>Fill the form bellow to join us</p>
-      </div>
+<div class="row justify-content-center">
+  <div class="col-sm-10 col-md-7 col-lg-5">
+    <div class="row">
+      <h4>Join us</h4>
+      <p>Fill the form bellow to join us</p>
+    </div>
+    <div class="row">
       <form
         [formGroup]="registerForm"
         (ngSubmit)="onRegister($event)"
         novalidate
       >
-        <form-control
-          [id]="'email'"
-          [type]="'text'"
-          formControlName="email"
-          [errors]="getError('email')"
-          [inputNgClass]="getClass('email')"
-        ></form-control>
+        <div class="row">
+          <form-control
+            [id]="'email'"
+            [type]="'text'"
+            [label]="'Email'"
+            formControlName="email"
+            [errors]="getError('email')"
+            [inputNgClass]="getClass('email')"
+          ></form-control>
 
-        <form-control
-          [id]="'username'"
-          [type]="'text'"
-          formControlName="username"
-          [errors]="getError('username')"
-          [inputNgClass]="getClass('username')"
-        ></form-control>
+          <form-control
+            [id]="'username'"
+            [type]="'text'"
+            [label]="'Username'"
+            formControlName="username"
+            [errors]="getError('username')"
+            [inputNgClass]="getClass('username')"
+          ></form-control>
 
-        <form-control
-          [id]="'password'"
-          [type]="'password'"
-          formControlName="password"
-          [errors]="getError('password')"
-          [inputNgClass]="getClass('password')"
-        ></form-control>
+          <form-control
+            [id]="'password'"
+            [type]="'password'"
+            [label]="'Password'"
+            formControlName="password"
+            [errors]="getError('password')"
+            [inputNgClass]="getClass('password')"
+          ></form-control>
 
-        <form-control
-          [id]="'passwordCheck'"
-          [type]="'password'"
-          formControlName="passwordCheck"
-          [errors]="getError('passwordCheck')"
-          [inputNgClass]="getClass('passwordCheck')"
-        ></form-control>
-
-        <button type="submit" class="btn btn-primary btn-sm">Register</button>
+          <form-control
+            [id]="'passwordCheck'"
+            [type]="'password'"
+            [label]="'Confirm Password'"
+            formControlName="passwordCheck"
+            [errors]="getError('passwordCheck')"
+            [inputNgClass]="getClass('passwordCheck')"
+          ></form-control>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-10 col-xs-8 col-sm-6">
+            <button type="submit" class="btn btn-primary w-100">
+              Register
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   </div>

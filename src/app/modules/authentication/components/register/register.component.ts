@@ -63,6 +63,9 @@ export class RegisterComponent implements OnInit {
 
   onRegister(event: any) {
     event.preventDefault();
-    if (this.registerForm.invalid) return;
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
   }
 }

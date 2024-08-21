@@ -44,6 +44,9 @@ export class LoginComponent {
 
   onLogin(event: any) {
     event.preventDefault();
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
   }
 }

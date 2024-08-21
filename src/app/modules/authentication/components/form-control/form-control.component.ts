@@ -18,8 +18,9 @@ export class FormControlComponent implements ControlValueAccessor {
   @Input() id = '';
   @Input() name? = this.id;
   @Input() inputClass = 'form-control';
+  @Input() label = this.id;
   @Input() inputNgClass = '';
-  @Input() containerClass? = 'form-floating mb-3';
+  @Input() containerClass? = 'form-floating mb-3 mw-75';
   @Input() errors: string[] = [];
 
   value = '';
