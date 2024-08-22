@@ -17,6 +17,12 @@ export const routes: Routes = [
   },
 
   {
+    path: 'user',
+    loadChildren: () =>
+      import('./modules/user/user.module').then((module) => module.UserModule),
+  },
+
+  {
     path: '**',
     component: NotFoundComponent,
   },

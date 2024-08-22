@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterValidatorService } from './service/formvalidation/register-validator.service';
 import { FormValidationPipePipe } from '../../pipe/form-validation-pipe.pipe';
+import { RegisterService } from './service/register/register.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +12,12 @@ import { FormValidationPipePipe } from '../../pipe/form-validation-pipe.pipe';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
-  constructor(private registerValidatorService: RegisterValidatorService) {}
+  constructor(
+    private registerValidatorService: RegisterValidatorService,
+    private registerService: RegisterService,
+    private toastService: ToastrService,
+    private router: Router
+  ) {}
   registerForm = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
@@ -67,5 +75,27 @@ export class RegisterComponent implements OnInit {
       this.registerForm.markAllAsTouched();
       return;
     }
+    this.registerService
+      .register({
+        email: this.registerForm.value.email ?? '',
+        password: this.registerForm.value.password ?? '',
+        username: this.registerForm.value.username ?? '',
+      })
+      .subscribe({
+        next: () => {
+          this.toastService.success('Account Created', 'Success');
+          this.toastService
+            .info('Click Here to navigate to the Login page')
+            .onTap.subscribe(() => {
+              this.router.navigate(['/authentication/login']);
+            });
+        },
+        error: () => {
+          this.toastService.error(
+            'Cannot connect to the authentication server',
+            'Error'
+          );
+        },
+      });
   }
 }

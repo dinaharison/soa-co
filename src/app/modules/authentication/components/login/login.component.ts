@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginValidatorService } from './service/formvalidation/login-validator.service';
 import { FormValidationPipePipe } from '../../pipe/form-validation-pipe.pipe';
+import { Router } from '@angular/router';
+import { LoginService } from './service/login/login.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +12,14 @@ import { FormValidationPipePipe } from '../../pipe/form-validation-pipe.pipe';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private loginValidatorSerice: LoginValidatorService) {}
+  constructor(
+    private loginValidatorSerice: LoginValidatorService,
+    private loginService: LoginService,
+    private router: Router,
+    private toastService: ToastrService
+  ) {}
+
+  isLoggedIn = false;
 
   loginForm = new FormGroup({
     email: new FormControl('', {
@@ -44,10 +54,25 @@ export class LoginComponent {
 
   onLogin(event: any) {
     event.preventDefault();
+    this.isLoggedIn = false;
+
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
-    console.log(this.loginForm.value);
+    this.loginService
+      .login({
+        email: this.loginForm.value.email ?? '',
+        password: this.loginForm.value.password ?? '',
+      })
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/user/']);
+          this.toastService.success('Authentication Successful', 'success');
+        },
+        error: (error) => {
+          this.toastService.error('Email or Password Incorrect', 'error');
+        },
+      });
   }
 }

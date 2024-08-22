@@ -19,4 +19,13 @@ export class HeaderComponent {
       name: 'Register',
     },
   ];
+
+  images = [
+    {
+      path: '',
+      alt: '',
+      title: '',
+      description: '',
+    },
+  ];
 }
