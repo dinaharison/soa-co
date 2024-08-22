@@ -24,14 +24,14 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     RouterModule,
     ReactiveFormsModule,
     FormValidationPipePipe,
-    AngularFireModule.initializeApp(environment.firebaseAuth),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     ToastrModule.forRoot(),
   ],
   providers: [
     LoginService,
     ToastrService,
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseAuth },
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
   ],
 })
 export class AuthenticationModule {}

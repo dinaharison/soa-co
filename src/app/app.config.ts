@@ -14,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimations(),
     provideToastr(),
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseAuth },
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig },
   ],
 };
