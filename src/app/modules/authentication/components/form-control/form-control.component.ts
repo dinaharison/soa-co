@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'form-control',
@@ -22,9 +23,14 @@ export class FormControlComponent implements ControlValueAccessor {
   @Input() inputNgClass = '';
   @Input() containerClass? = 'form-floating mb-3 mw-75';
   @Input() errors: string[] = [];
+  @Input() isPassword?: boolean = false;
 
   value = '';
   isDisabled = false;
+  showPassword = false;
+  faLock = faLock;
+  faLockOpen = faLockOpen;
+
   onChange: (value: any) => void = () => null;
   onTouched: () => void = () => null;
 
@@ -54,5 +60,11 @@ export class FormControlComponent implements ControlValueAccessor {
   }
   setDisabledState?(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+  }
+
+  tooglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    if (this.showPassword) this.type = 'text';
+    else this.type = 'password';
   }
 }

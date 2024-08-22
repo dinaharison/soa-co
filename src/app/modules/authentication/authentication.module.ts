@@ -15,6 +15,7 @@ import {
 import { environment } from '../../../environments/environment.development';
 import { LoginService } from './components/login/service/login/login.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, FormControlComponent],
@@ -27,6 +28,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     ToastrModule.forRoot(),
+    FontAwesomeModule,
   ],
   providers: [
     LoginService,

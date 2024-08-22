@@ -12,7 +12,15 @@
     [disabled]="isDisabled ? 'disabled' : ''"
     (input)="onInputChanged($event)"
   />
-  <label [for]="id">{{ label }}</label>
+  <label [for]="id"
+    >{{ label }}
+    <span *ngIf="isPassword" (click)="tooglePasswordVisibility()">
+      <fa-icon
+        class="clickable-icon"
+        [icon]="showPassword ? faLockOpen : faLock"
+      ></fa-icon>
+    </span>
+  </label>
   <div *ngIf="errors.length > 0">
     <div class="errors" *ngFor="let error of errors">
       <small>{{ error }}</small>

@@ -2,7 +2,7 @@
   <div class="col-sm-10 col-md-7 col-lg-5">
     <div class="row">
       <h4>Join us</h4>
-      <p>Fill the form bellow to join us</p>
+      <p>Fill the form bellow</p>
     </div>
     <div class="row">
       <form
@@ -36,6 +36,7 @@
             formControlName="password"
             [errors]="getError('password')"
             [inputNgClass]="getClass('password')"
+            [isPassword]="true"
           ></form-control>
 
           <form-control
@@ -45,6 +46,7 @@
             formControlName="passwordCheck"
             [errors]="getError('passwordCheck')"
             [inputNgClass]="getClass('passwordCheck')"
+            [isPassword]="true"
           ></form-control>
         </div>
         <div class="row">

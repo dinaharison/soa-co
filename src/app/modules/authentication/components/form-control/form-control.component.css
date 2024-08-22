@@ -2,3 +2,8 @@
   color: red;
   font-size: small;
 }
+
+.clickable-icon {
+  pointer-events: auto !important;
+  margin-left: 0.5rem;
+}

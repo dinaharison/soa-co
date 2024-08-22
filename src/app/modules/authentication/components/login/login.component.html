@@ -10,7 +10,7 @@
       <div class="row">
         <h4>Login to Your Account</h4>
         <p>
-          Welcome back! Please enter your credentials to access your account.
+          Welcome back! Please enter your credentials to access to your account.
         </p>
       </div>
       <div class="row">
@@ -27,6 +27,7 @@
             [id]="'password'"
             [type]="'password'"
             [label]="'Password'"
+            [isPassword]="true"
             formControlName="password"
             [errors]="getError('password')"
             [inputNgClass]="getClass('password')"
